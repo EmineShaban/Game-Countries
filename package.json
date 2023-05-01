@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "react-id-generator": "^3.0.2",
+    "uuidv4": "^6.2.13"
+  }
+}
