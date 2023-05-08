@@ -4,6 +4,7 @@ export const getAll = async() => {
     const response = await fetch(baseUrl)
     const result = await response.json()
 
-    // return Object.values(result)
-    return result
+    return Object.values(result)
+    // return result
+    // return Object.entries(result)
 }

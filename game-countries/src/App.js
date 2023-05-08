@@ -11,17 +11,9 @@ const [country, setCountry] = useState([])
 
   useEffect(() => {
     countryService.getAll()
-    .then(setCountry
-      // setCountry.map(c=>{
-      //   console.log(c)
-
-      // })
-    //   console.log(setCountry)
-    // }
-    ).catch(err =>{
+    .then(setCountry).catch(err =>{
       console.log(err)
     })
-
   },[])
 
 
