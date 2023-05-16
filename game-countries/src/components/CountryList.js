@@ -1,97 +1,50 @@
-// import Country from "./Country"
 
-import shuffle from "../services/shuffle"
+import { useEffect, useState } from 'react';
+// import './App.css';
+// import * as countryService from './services/countryService';
+import Country from './Country';
 
-// import { useState, useEffect } from "react"
-export default function CountryList({
-    countriesDetails,
 
-}) {
 
-    let result = []
-    let a = 0
-    // console.log(result)
-    let rightAnswer = null
-    // const [country, setCountry] = useState();
 
-    // useEffect(() => {
-    function randomCountry() {
-        if (countriesDetails) {
-            a = Number(Math.round(Math.random() * countriesDetails.length))
-            result = countriesDetails[a]
-            rightAnswer = result.name
-            console.log(result)
-            console.log(rightAnswer)
-            // setCountry(result)
+function CountryList() {
 
-        }
-        console.log(result)
+  const [countriesDetails, setCountriesDetails] = useState();
 
+  useEffect(() => {
+
+    async function getCountryDetails() {
+      const url = "https://restcountries.com/v3.1/all";
+      try {
+        const response = await (await fetch(url)).json();
+
+        const details = response.map((country) => {
+          const countryDetail = {
+            name: country.name.common,
+            capital: country.capital,
+            flags: country.flags.png,
+          };
+          return countryDetail;
+        });
+        console.log(details)
+        setCountriesDetails(details);
+      } catch (error) {
+        console.log(error);
+      }
     }
-    randomCountry()
-
-    let optionAnswersIndex = []
-    let optionAnswers = []
-    function randomAnswers() {
-
-        if (countriesDetails) {
-            // console.log(rundomIndex)
-            for (let index = 0; index < 3; index++) {
-                let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
-                if (rundomIndex !== a) {
-                    optionAnswersIndex.push(rundomIndex)
-                    // optionAnswers.push(countriesDetails[rundomIndex])
-                } else {
-                    index -= 1
-                }
-
-            }
-            optionAnswersIndex.push(a)
-
-            console.log(optionAnswersIndex)
-            console.log(a)
-            for (let index = 0; index < optionAnswersIndex.length; index++) {
-                // let r = Number(Math.round(Math.random() * optionAnswersIndex.length))
-                // console.log(r)
-                optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
-            }
-  
-
-shuffle(optionAnswers)
-
-
-            
-        }
-    }
-    
-    randomAnswers()
-    
-  
+    getCountryDetails();
+  }, []);
 
 
 
+  return (
+    <div>
 
+      <p>Hello, </p>
+      <Country countriesDetails={countriesDetails} />
+    </div>
 
-    return (
-        <div>
-            <p>
-                Hello!
-                {result.capital} is the capital of?
-            </p>
-
-            
-                {optionAnswers.map((countries, index) =>(
-
-                    <div key={index}>
-                        <p>
-
-                        {countries.name}
-                        </p>
-                    </div>
-                ))}
- 
-
-        </div>
-    );
-
+  );
 }
+
+export default CountryList;
