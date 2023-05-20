@@ -38,11 +38,11 @@ function CountryList() {
 
 
   return (
-    <div>
-
-      <p>Hello, </p>
+ <div>
+      {/* <p>Hello, </p> */}
       <Country countriesDetails={countriesDetails} />
     </div>
+
 
   );
 }

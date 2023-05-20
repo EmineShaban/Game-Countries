@@ -1,28 +1,39 @@
-import { Navigate, useNavigate} from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import shuffle from "../services/shuffle"
-import {useState } from 'react'
-// import WrongAnswer from './WrongAnswer'
+import { useState } from 'react'
+import './Country.css';
+
+
+
 
 export default function Country({
     countriesDetails,
 
 }) {
-
+    
+    const navigate = useNavigate();
     let optionAnswersIndex = []
     let optionAnswers = []
     let result = []
     let a = 0
     let rightAnswer = null
-    const navigate = useNavigate();
+    let isWrongAnswer = false
 
 
     function randomCountry() {
 
         if (countriesDetails) {
             a = Number(Math.round(Math.random() * countriesDetails.length))
-            result = countriesDetails[a]
-            rightAnswer = result.name
-            console.log(rightAnswer)
+            if(countriesDetails[a] !== undefined){
+                result = countriesDetails[a]
+                rightAnswer = result.name
+                console.log(rightAnswer)
+
+            }else{
+                result = countriesDetails[a+1]
+                rightAnswer = result.name
+                console.log(rightAnswer)
+            }
         }
     }
     randomCountry()
@@ -32,6 +43,8 @@ export default function Country({
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
+                // if()
+                console.log(rundomIndex)
                 if (rundomIndex !== a) {
                     optionAnswersIndex.push(rundomIndex)
                 } else {
@@ -43,11 +56,18 @@ export default function Country({
 
 
             for (let index = 0; index < optionAnswersIndex.length; index++) {
+                if(countriesDetails[optionAnswersIndex[index]] !== undefined){
+                    optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
 
-                optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
+                    console.log(optionAnswersIndex[index]+1)
+                }else{
+                    optionAnswers.push(countriesDetails[optionAnswersIndex[index]+1])
+
+                }
+
             }
 
-
+console.log(optionAnswers)
             shuffle(optionAnswers)
 
 
@@ -62,34 +82,64 @@ export default function Country({
 
     const [countCorrectAnswer, setCountCorrectAnswer] = useState(0);
 
-   
+
     console.log(countCorrectAnswer)
 
     function handleInput(e) {
 
-        console.log(e.target.value);
+        console.log(e.currentTarget.value);
 
-        if (e.target.value == rightAnswer) {
-            setCountCorrectAnswer(countCorrectAnswer+1) 
-            // console.log(countCorrectAnswer)
+        if (e.target.value === rightAnswer) {
+            console.log(e.target)
 
-            return <Navigate to={'/'}/>
+            e.currentTarget.classList.add("right")
+
+
+
+            window.setTimeout(() => {
+                e.target.classList.remove("right")
+                console.log(e.currentTarget)
+
+                setCountCorrectAnswer(countCorrectAnswer + 1)
+
+
+                return <Navigate to={'/'} />
+            }, 1000)
+
         } else {
-            setCountCorrectAnswer(0) 
 
             console.log('wrong')
-            return navigate('/wrong', { state: { id: 7, color: 'green' } })
-            // return <Navigate to={'/wrong'} state={ countCorrectAnswer }/>
+            isWrongAnswer = true
+            console.log(isWrongAnswer)
+
+            e.currentTarget.classList.add("wrong")
+
+            window.setTimeout(() => {
+                e.target.classList.remove("wrong")
+                setCountCorrectAnswer(0)
+
+
+
+                return navigate('/wrong', {
+                    state: {
+                        answers: countCorrectAnswer,
+                    }
+                });
+            }, 1000)
+
+
+
         }
     }
 
 
-    
+
 
 
     return (
+    
         <div>
-            <p>
+            <p className="question">
                 {result.capital} is the capital of?
             </p>
 
@@ -97,13 +147,13 @@ export default function Country({
             {optionAnswers.map((countries, index) => (
 
                 <div key={index}>
-                    <button value={countries.name} onClick={handleInput}>
-
+                    <button className="choose-answers" value={countries.name} onClick={handleInput}>
                         {countries.name}
                     </button>
                 </div>
             ))}
-
+            {/* <button className="next">Next</button> */}
+    {/* {isWrongAnswer===true && <button className="next">Next</button> } */}
 
         </div>
     );

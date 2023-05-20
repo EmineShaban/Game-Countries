@@ -7,11 +7,17 @@ import WrongAnswer from './components/WrongAnswer';
 
 
 
+
+
+
 function App() {
 
 
   return (
     <div>
+     <div className="component">
+            <h1>COUNTRY QUIZ</h1>
+            <div className="quiz">
 
       <Routes>
 
@@ -19,6 +25,8 @@ function App() {
 <Route path='/wrong' element={<WrongAnswer />}/> 
 
       </Routes>
+    </div>
+    </div>
     </div>
 
   );
