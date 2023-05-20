@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate} from "react-router-dom"
 import shuffle from "../services/shuffle"
+import {useState } from 'react'
 // import WrongAnswer from './WrongAnswer'
 
 export default function Country({
@@ -13,7 +14,6 @@ export default function Country({
     let a = 0
     let rightAnswer = null
     const navigate = useNavigate();
-    // let countOfCorrectAnswers = 0
 
 
     function randomCountry() {
@@ -60,19 +60,26 @@ export default function Country({
 
 
 
+    const [countCorrectAnswer, setCountCorrectAnswer] = useState(0);
 
+   
+    console.log(countCorrectAnswer)
 
     function handleInput(e) {
 
         console.log(e.target.value);
 
         if (e.target.value == rightAnswer) {
-            // countOfCorrectAnswers++
-            // console.log(countOfCorrectAnswers)
-            return navigate('/')
+            setCountCorrectAnswer(countCorrectAnswer+1) 
+            // console.log(countCorrectAnswer)
+
+            return <Navigate to={'/'}/>
         } else {
+            setCountCorrectAnswer(0) 
+
             console.log('wrong')
-            return navigate('/wrong')
+            return navigate('/wrong', { state: { id: 7, color: 'green' } })
+            // return <Navigate to={'/wrong'} state={ countCorrectAnswer }/>
         }
     }
 
