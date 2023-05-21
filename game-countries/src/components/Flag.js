@@ -1,7 +1,7 @@
 import { Navigate, useNavigate } from "react-router-dom"
 import shuffle from "../services/shuffle"
 import { useState } from 'react'
-import './Country.css';
+import './Flag.css';
 
 
 
@@ -120,7 +120,7 @@ export default function Country({
 
 
 
-                return navigate('/wrong', {
+                return navigate('/wrong-flag', {
                     state: {
                         answers: countCorrectAnswer,
                     }
@@ -139,9 +139,10 @@ export default function Country({
     return (
 
         <div>
-            <p className="question">
-                {result.capital} is the capital of?
-            </p>
+            {/* <p>ggggg</p> */}
+            <div className="img-flag"><img src={result.flags} alt="flag"></img></div>
+            
+            <p className="question">Which country does this flag belong to?</p>
 
 
             {optionAnswers.map((countries, index) => (

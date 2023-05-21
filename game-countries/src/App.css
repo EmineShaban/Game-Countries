@@ -26,3 +26,7 @@ div.quiz {
     margin: auto;
     padding: 30px;
 }
+
+div.component a{
+    text-decoration: none;
+}

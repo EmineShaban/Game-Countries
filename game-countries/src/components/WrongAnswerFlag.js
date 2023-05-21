@@ -4,7 +4,7 @@ import "./WrongAnswer.css"
 
 
 
-export default function WrongAnswer(answers) {
+export default function WrongAnswerFlag(answers) {
 
     const location = useLocation();
     let countOfRightAnswers = location?.state?.answers;
@@ -19,7 +19,7 @@ export default function WrongAnswer(answers) {
             <h1 className="results">Results</h1>
             <p className="results2">You got <b><span className="results3">{countOfRightAnswers}</span></b> correct answers </p>
 
-            <Link className="try-again2" to={'/capital-quiz'}><button className="try-again">Try again</button></Link>
+            <Link className="try-again2" to={'/flag-quiz'}><button className="try-again">Try again</button></Link>
 
         </div>
     )

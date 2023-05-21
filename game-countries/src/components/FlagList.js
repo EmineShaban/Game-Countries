@@ -42,7 +42,7 @@ function CountryList() {
         <div>
             {/* <Flag countriesDetails={countriesDetails} /> */}
 
-            <Country countriesDetails={countriesDetails} />
+            <Flag countriesDetails={countriesDetails} />
         </div>
 
 
