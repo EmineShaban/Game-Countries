@@ -9,7 +9,7 @@ export default function WrongAnswer(answers) {
     const location = useLocation();
     let countOfRightAnswers = location?.state?.answers;
 
-    console.log(countOfRightAnswers)
+    // console.log(countOfRightAnswers)
 
     return (
         <div>

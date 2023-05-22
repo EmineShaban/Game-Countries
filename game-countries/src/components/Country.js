@@ -17,7 +17,7 @@ export default function Country({
     let result = []
     let a = 0
     let rightAnswer = null
-    let isWrongAnswer = false
+    // let isWrongAnswer = false
 
 
     function randomCountry() {
@@ -43,8 +43,7 @@ export default function Country({
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
-                // if()
-                console.log(rundomIndex)
+ 
                 if (rundomIndex !== a) {
                     optionAnswersIndex.push(rundomIndex)
                 } else {
@@ -58,20 +57,19 @@ export default function Country({
             for (let index = 0; index < optionAnswersIndex.length; index++) {
                 if (countriesDetails[optionAnswersIndex[index]] !== undefined) {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
-
-                    console.log(optionAnswersIndex[index] + 1)
                 } else {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index] + 1])
-
                 }
 
             }
 
             console.log(optionAnswers)
             shuffle(optionAnswers)
-
-
-
+            console.log(optionAnswers)
+           optionAnswers.map((k, i)=>{
+            console.log(k)
+           })
+// console.log(r)
         }
     }
 
@@ -82,43 +80,24 @@ export default function Country({
 
     const [countCorrectAnswer, setCountCorrectAnswer] = useState(0);
 
-
-    console.log(countCorrectAnswer)
-
     function handleInput(e) {
 
-        console.log(e.currentTarget.value);
-
-        if (e.target.value === rightAnswer) {
-            console.log(e.target)
-
+        if (e.target.value === rightAnswer) { 
             e.currentTarget.classList.add("right")
 
-
-
             window.setTimeout(() => {
-                e.target.classList.remove("right")
-                console.log(e.currentTarget)
-
+                e.target.classList.remove("right") 
                 setCountCorrectAnswer(countCorrectAnswer + 1)
-
 
                 return <Navigate to={'/capital-quiz'} />
             }, 1000)
 
         } else {
-
-            console.log('wrong')
-            isWrongAnswer = true
-            console.log(isWrongAnswer)
-
             e.currentTarget.classList.add("wrong")
-
+console.log(e)
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
                 setCountCorrectAnswer(0)
-
-
 
                 return navigate('/wrong', {
                     state: {
@@ -126,9 +105,6 @@ export default function Country({
                     }
                 });
             }, 1000)
-
-
-
         }
     }
 
@@ -153,7 +129,6 @@ export default function Country({
                 </div>
             ))}
             {/* <button className="next">Next</button> */}
-            {/* {isWrongAnswer===true && <button className="next">Next</button> } */}
 
         </div>
     );
