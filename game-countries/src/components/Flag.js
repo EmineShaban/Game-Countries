@@ -17,8 +17,9 @@ export default function Country({
     let result = []
     let a = 0
     let rightAnswer = null
-    let isWrongAnswer = false
-
+    let correctAnswer
+    let listItems =''
+    let nextButton = ''
 
     function randomCountry() {
 
@@ -43,8 +44,6 @@ export default function Country({
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
-                // if()
-                console.log(rundomIndex)
                 if (rundomIndex !== a) {
                     optionAnswersIndex.push(rundomIndex)
                 } else {
@@ -59,7 +58,6 @@ export default function Country({
                 if (countriesDetails[optionAnswersIndex[index]] !== undefined) {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
 
-                    console.log(optionAnswersIndex[index] + 1)
                 } else {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index] + 1])
 
@@ -67,7 +65,6 @@ export default function Country({
 
             }
 
-            console.log(optionAnswers)
             shuffle(optionAnswers)
 
 
@@ -83,14 +80,11 @@ export default function Country({
     const [countCorrectAnswer, setCountCorrectAnswer] = useState(0);
 
 
-    console.log(countCorrectAnswer)
 
     function handleInput(e) {
 
-        console.log(e.currentTarget.value);
 
         if (e.target.value === rightAnswer) {
-            console.log(e.target)
 
             e.currentTarget.classList.add("right")
 
@@ -98,7 +92,6 @@ export default function Country({
 
             window.setTimeout(() => {
                 e.target.classList.remove("right")
-                console.log(e.currentTarget)
 
                 setCountCorrectAnswer(countCorrectAnswer + 1)
 
@@ -109,13 +102,27 @@ export default function Country({
         } else {
 
             console.log('wrong')
-            isWrongAnswer = true
-            console.log(isWrongAnswer)
 
             e.currentTarget.classList.add("wrong")
 
+
+            nextButton = e.target.parentElement.parentElement
+            console.log(nextButton)
+
+        
+            listItems = e.target.parentElement.parentElement.children
+
+            for (let i = 0; i < 4; i++) {
+              if (listItems[i].innerText === rightAnswer) {
+                correctAnswer = listItems[i]
+                correctAnswer = correctAnswer.children[0]
+                correctAnswer.classList.add("right")
+
+              }
+            }
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
+                correctAnswer.classList.remove("right")
                 setCountCorrectAnswer(0)
 
 
@@ -153,8 +160,7 @@ export default function Country({
                     </button>
                 </div>
             ))}
-            {/* <button className="next">Next</button> */}
-            {/* {isWrongAnswer===true && <button className="next">Next</button> } */}
+    <button className="next">Next</button>
 
         </div>
     );

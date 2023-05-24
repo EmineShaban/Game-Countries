@@ -17,8 +17,8 @@ export default function Country({
     let result = []
     let a = 0
     let rightAnswer = null
-    // let isWrongAnswer = false
-
+    let correctAnswer
+    let listItems =''
 
     function randomCountry() {
 
@@ -43,7 +43,7 @@ export default function Country({
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
- 
+
                 if (rundomIndex !== a) {
                     optionAnswersIndex.push(rundomIndex)
                 } else {
@@ -66,10 +66,10 @@ export default function Country({
             console.log(optionAnswers)
             shuffle(optionAnswers)
             console.log(optionAnswers)
-           optionAnswers.map((k, i)=>{
-            console.log(k)
-           })
-// console.log(r)
+            optionAnswers.map((k, i) => {
+                console.log(k)
+            })
+            // console.log(r)
         }
     }
 
@@ -82,11 +82,11 @@ export default function Country({
 
     function handleInput(e) {
 
-        if (e.target.value === rightAnswer) { 
+        if (e.target.value === rightAnswer) {
             e.currentTarget.classList.add("right")
 
             window.setTimeout(() => {
-                e.target.classList.remove("right") 
+                e.target.classList.remove("right")
                 setCountCorrectAnswer(countCorrectAnswer + 1)
 
                 return <Navigate to={'/capital-quiz'} />
@@ -94,20 +94,39 @@ export default function Country({
 
         } else {
             e.currentTarget.classList.add("wrong")
-console.log(e)
+            console.log(e)
+
+
+            listItems = e.target.parentElement.parentElement.children
+            // console.log(listItems)
+            // console.log(listItems[2].innerText)
+
+            for (let i = 0; i < 4; i++) {
+              if (listItems[i].innerText === rightAnswer) {
+                correctAnswer = listItems[i]
+                correctAnswer = correctAnswer.children[0]
+                // let correctAns = correctAnswer
+                correctAnswer.classList.add("right")
+        console.log(correctAnswer)
+        // return correctAnswer
+              }
+            }
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
+                correctAnswer.classList.remove("right")
+
                 setCountCorrectAnswer(0)
+
+                console.log(correctAnswer)
 
                 return navigate('/wrong', {
                     state: {
                         answers: countCorrectAnswer,
                     }
                 });
-            }, 1000)
+            }, 2000)
         }
     }
-
 
 
 
