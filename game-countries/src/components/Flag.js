@@ -170,7 +170,7 @@ export default function Country({
     function timoutFunc() {
         console.log('mdjdjdjd')
         console.log(time)
-        // window.setTimeout(0)
+
         nextButton[6].classList.remove("next2")
         correctAnswer.classList.remove("right")
 
