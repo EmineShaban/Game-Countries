@@ -68,7 +68,7 @@ button.next{
     display: none;
 }
 .next2{
-    display: block;
+    display: block !important;
 }
 img{
     width: 100%;

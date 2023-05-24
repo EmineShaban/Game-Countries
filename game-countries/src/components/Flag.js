@@ -18,8 +18,13 @@ export default function Country({
     let a = 0
     let rightAnswer = null
     let correctAnswer
-    let listItems =''
+    let listItems = ''
     let nextButton = ''
+    let time
+
+
+
+
 
     function randomCountry() {
 
@@ -40,12 +45,15 @@ export default function Country({
     randomCountry()
 
     function randomAnswers() {
-
+//иногда пишет undefined на country.name
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
                 if (rundomIndex !== a) {
                     optionAnswersIndex.push(rundomIndex)
+                // }if else(){
+                //     if (countriesDetails[a] !== undefined) {
+
                 } else {
                     index -= 1
                 }
@@ -59,12 +67,13 @@ export default function Country({
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
 
                 } else {
+                     
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index] + 1])
 
                 }
 
             }
-
+// console.log(optionAnswers)
             shuffle(optionAnswers)
 
 
@@ -88,16 +97,34 @@ export default function Country({
 
             e.currentTarget.classList.add("right")
 
+            nextButton = e.target.parentElement.parentElement.children
+            nextButton[6].classList.add("next2")
+            console.log(nextButton[6])
 
 
-            window.setTimeout(() => {
+            listItems = e.target.parentElement.parentElement.children
+            // console.log(listItems)
+
+            for (let i = 0; i < listItems.length; i++) {
+                console.log(listItems[i])
+                if (listItems[i].innerText === rightAnswer) {
+                    correctAnswer = listItems[i]
+                    correctAnswer = correctAnswer.children[0]
+                    // console.log(correctAnswer)
+                    correctAnswer.classList.add("right")
+
+                }
+            }
+
+            time = window.setTimeout(() => {
                 e.target.classList.remove("right")
+                nextButton[6].classList.remove("next2")
 
                 setCountCorrectAnswer(countCorrectAnswer + 1)
 
 
-                return <Navigate to={'/capital-quiz'} />
-            }, 1000)
+                return <Navigate to={'/flag-quiz'} />
+            }, 2000)
 
         } else {
 
@@ -106,19 +133,20 @@ export default function Country({
             e.currentTarget.classList.add("wrong")
 
 
-            nextButton = e.target.parentElement.parentElement
-            console.log(nextButton)
 
-        
+
             listItems = e.target.parentElement.parentElement.children
+            // console.log(listItems)
 
-            for (let i = 0; i < 4; i++) {
-              if (listItems[i].innerText === rightAnswer) {
-                correctAnswer = listItems[i]
-                correctAnswer = correctAnswer.children[0]
-                correctAnswer.classList.add("right")
+            for (let i = 0; i < listItems.length; i++) {
+                console.log(listItems[i])
+                if (listItems[i].innerText === rightAnswer) {
+                    correctAnswer = listItems[i]
+                    correctAnswer = correctAnswer.children[0]
+                    // console.log(correctAnswer)
+                    correctAnswer.classList.add("right")
 
-              }
+                }
             }
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
@@ -132,13 +160,27 @@ export default function Country({
                         answers: countCorrectAnswer,
                     }
                 });
-            }, 1000)
+            }, 2000)
 
 
 
         }
     }
 
+    function timoutFunc() {
+        console.log('mdjdjdjd')
+        console.log(time)
+        // window.setTimeout(0)
+        nextButton[6].classList.remove("next2")
+        correctAnswer.classList.remove("right")
+
+        window.clearTimeout(time)
+        setCountCorrectAnswer(countCorrectAnswer + 1)
+
+        // return <Navigate to={'/flag-quiz'} />
+        return navigate('/flag-quiz')
+
+    }
 
 
 
@@ -148,7 +190,7 @@ export default function Country({
         <div>
             {/* <p>ggggg</p> */}
             <div className="img-flag"><img src={result.flags} alt="flag"></img></div>
-            
+
             <p className="question">Which country does this flag belong to?</p>
 
 
@@ -160,7 +202,7 @@ export default function Country({
                     </button>
                 </div>
             ))}
-    <button className="next">Next</button>
+            <button className="next" onClick={timoutFunc}>Next</button>
 
         </div>
     );

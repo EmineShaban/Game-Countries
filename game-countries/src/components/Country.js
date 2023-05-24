@@ -18,7 +18,9 @@ export default function Country({
     let a = 0
     let rightAnswer = null
     let correctAnswer
-    let listItems =''
+    let listItems = ''
+    let nextButton = ''
+    let time
 
     function randomCountry() {
 
@@ -85,12 +87,34 @@ export default function Country({
         if (e.target.value === rightAnswer) {
             e.currentTarget.classList.add("right")
 
-            window.setTimeout(() => {
+            
+            listItems = e.target.parentElement.parentElement.children
+            // console.log(listItems)
+            nextButton = e.target.parentElement.parentElement.children
+            nextButton[5].classList.add("next2")
+            console.log(nextButton)
+
+            
+            for (let i = 0; i < listItems.length; i++) {
+                console.log(listItems[i])
+                
+                if (listItems[i].innerText === rightAnswer) {
+                    correctAnswer = listItems[i]
+                    correctAnswer = correctAnswer.children[0]
+                    // console.log(correctAnswer)
+                    correctAnswer.classList.add("right")
+                    
+                }
+            }
+            
+            
+            time = window.setTimeout(() => {
                 e.target.classList.remove("right")
+                nextButton[5].classList.remove("next2")
                 setCountCorrectAnswer(countCorrectAnswer + 1)
 
                 return <Navigate to={'/capital-quiz'} />
-            }, 1000)
+            }, 2000)
 
         } else {
             e.currentTarget.classList.add("wrong")
@@ -113,7 +137,7 @@ export default function Country({
             }
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
-                correctAnswer.classList.remove("right")
+                // correctAnswer.classList.remove("right")
 
                 setCountCorrectAnswer(0)
 
@@ -129,7 +153,20 @@ export default function Country({
     }
 
 
+    function timoutFunc() {
+        console.log('mdjdjdjd')
+        console.log(time)
+        // window.setTimeout(0)
+        nextButton[5].classList.remove("next2")
+        correctAnswer.classList.remove("right")
 
+        window.clearTimeout(time)
+        setCountCorrectAnswer(countCorrectAnswer + 1)
+
+        // return <Navigate to={'/flag-quiz'} />
+        return navigate('/capital-quiz')
+
+    }
 
     return (
 
@@ -147,7 +184,7 @@ export default function Country({
                     </button>
                 </div>
             ))}
-            {/* <button className="next">Next</button> */}
+            <button className="next" onClick={timoutFunc}>Next</button>
 
         </div>
     );
