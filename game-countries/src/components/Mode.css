@@ -9,3 +9,19 @@ h1.select {
     
     color: #1D355D;
 }
+
+
+button.choose-mode {
+    border: 2px solid #1D355D;
+    border-radius: 12px;
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: 9px 0;
+    /* font-weight: 600; */
+    font-size: 18px;
+    color: #1D355D;
+    text-align: left;
+    }

@@ -16,10 +16,10 @@ export default function Mode({
 
     return (
         <div>
-           <h1 className="select">Select the game mode</h1>
+           <h1 className="select"><b>Select the game mode</b></h1>
 
-            <Link className="try-again2" to={'/capital-quiz'} ><button className="try-again">City is the capital of...</button></Link>
-            <Link className="try-again2" to={'/flag-quiz'}><button className="try-again">Flag belong to country...</button></Link>
+            <Link className="try-again2" to={'/capital-quiz'} ><button className="choose-mode">City is the capital of...</button></Link>
+            <Link className="try-again2" to={'/flag-quiz'}><button className="choose-mode">Flag belong to country...</button></Link>
 
         </div>
     )
