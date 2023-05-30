@@ -21,12 +21,15 @@ export default function Country({
     let listItems = ''
     let nextButton = ''
     let time
+    let undefinedArr =[6, 82, 163, 231]
+
+
 
     function randomCountry() {
 
         if (countriesDetails) {
             a = Number(Math.round(Math.random() * countriesDetails.length))
-            if (countriesDetails[a] !== undefined) {
+            if (countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
                 result = countriesDetails[a]
                 rightAnswer = result.name
                 console.log(rightAnswer)
@@ -46,7 +49,8 @@ export default function Country({
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
 
-                if (rundomIndex !== a) {
+                if (rundomIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
+
                     optionAnswersIndex.push(rundomIndex)
                 } else {
                     index -= 1
@@ -148,7 +152,7 @@ export default function Country({
                         answers: countCorrectAnswer,
                     }
                 });
-            }, 2000)
+            }, 1500)
         }
     }
 

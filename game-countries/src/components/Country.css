@@ -81,3 +81,11 @@ margin: 0 auto;
 .next2{
     display: block !important;
 }
+
+
+@media only screen and (max-width: 415px) {
+
+div.quiz{
+    padding: 20px;
+}
+}

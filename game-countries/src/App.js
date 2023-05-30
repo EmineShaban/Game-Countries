@@ -18,9 +18,12 @@ function App() {
 
 
   return (
-    <div>
+    <div className='first-div'>
       <div className="component">
-        <Link to={'/'}><h1>COUNTRY QUIZ</h1></Link>
+        <div className='link'>
+        <Link to={'/'}><h1 className='country-h1'>COUNTRY QUIZ</h1></Link>
+
+        </div>
         <div className="quiz">
 
           <Routes>

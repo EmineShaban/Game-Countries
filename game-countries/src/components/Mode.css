@@ -1,12 +1,10 @@
-
-
 h1.select {
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    /* font-size: 24px; */
     line-height: 36px;
-    
+
     color: #1D355D;
 }
 
@@ -24,4 +22,16 @@ button.choose-mode {
     font-size: 18px;
     color: #1D355D;
     text-align: left;
+}
+
+
+@media only screen and (max-width: 415px) {
+     h1{
+        font-size: 20px;
     }
+/* div.component{
+    width: 85%;
+    margin: 20% auto;
+
+} */
+}

@@ -30,7 +30,8 @@ export default function Country({
 
         if (countriesDetails) {
             a = Number(Math.round(Math.random() * countriesDetails.length))
-            if (countriesDetails[a] !== undefined) {
+            if (countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
+
                 result = countriesDetails[a]
                 rightAnswer = result.name
                 console.log(rightAnswer)
@@ -163,7 +164,7 @@ export default function Country({
                         answers: countCorrectAnswer,
                     }
                 });
-            }, 2000)
+            }, 1500)
 
 
 
