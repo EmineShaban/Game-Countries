@@ -29,7 +29,8 @@ export default function Country({
     function randomCountry() {
 
         if (countriesDetails) {
-            a = Number(Math.round(Math.random() * countriesDetails.length))
+            a = Number(Math.round(Math.random() * countriesDetails.length-1))
+            console.log(a)
             if (countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
 
                 result = countriesDetails[a]
@@ -37,9 +38,18 @@ export default function Country({
                 console.log(rightAnswer)
 
             } else {
-                result = countriesDetails[a + 1]
+                a = a-1
+                if(countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
+                result = countriesDetails[a]
                 rightAnswer = result.name
                 console.log(rightAnswer)
+                }else{
+                    a = a-1
+                    console.log(a)
+                    result = countriesDetails[a]
+                rightAnswer = result.name
+                console.log(rightAnswer)
+                }
             }
         }
     }
@@ -50,6 +60,8 @@ export default function Country({
         if (countriesDetails) {
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
+                console.log(a)
+                console.log(rundomIndex)
                 if (rundomIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
                     optionAnswersIndex.push(rundomIndex)
                     console.log(rundomIndex)
@@ -59,7 +71,14 @@ export default function Country({
                 //     if (countriesDetails[a] !== undefined) {
 
                 } else {
-                    index -= 1
+                    let newIndex = rundomIndex-1
+                    if(newIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
+                    optionAnswersIndex.push(newIndex)
+                    }else{
+                        let newIndex1 = rundomIndex-1
+console.log(newIndex1)
+                        optionAnswersIndex.push(newIndex1)
+                    }
                 }
 
             }

@@ -36,9 +36,18 @@ export default function Country({
                 rightAnswer = result.name
                 console.log(rightAnswer)
             } else {
-                result = countriesDetails[a + 1]
+                a = a-1
+                if(countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
+                result = countriesDetails[a]
                 rightAnswer = result.name
                 console.log(rightAnswer)
+                }else{
+                    a = a-1
+                    console.log(a)
+                    result = countriesDetails[a]
+                rightAnswer = result.name
+                console.log(rightAnswer)
+                }
             }
         }
     }
@@ -51,18 +60,31 @@ export default function Country({
     function randomAnswers() {
 
         if (countriesDetails) {
+            console.log(a)
             for (let index = 0; index < 3; index++) {
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
-
+console.log(rundomIndex)
                 if (rundomIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
+                    // console.log(newIndex)
+
                     optionAnswersIndex.push(rundomIndex)
                 } else {
-                    index -= 1
+                    let newIndex = rundomIndex-1
+                    
+                    if(newIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
+                        console.log(newIndex)
+
+                        optionAnswersIndex.push(newIndex)
+                    }else{
+                        let newIndex1 = rundomIndex-1
+console.log(newIndex1)
+                        optionAnswersIndex.push(newIndex1)
+                    }
                 }
             }
 
             optionAnswersIndex.push(a)
-
+console.log(optionAnswersIndex)
 
             for (let index = 0; index < optionAnswersIndex.length; index++) {
 
