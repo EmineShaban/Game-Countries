@@ -110,7 +110,9 @@ export default function Country({
             // console.log(listItems)
 
             for (let i = 0; i < listItems.length; i++) {
-                console.log(listItems[i])
+                // console.log(listItems[i])
+                listItems[i].children[0].disabled = true
+
                 if (listItems[i].innerText === rightAnswer) {
                     correctAnswer = listItems[i]
                     correctAnswer = correctAnswer.children[0]

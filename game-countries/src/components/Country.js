@@ -21,19 +21,20 @@ export default function Country({
     let listItems = ''
     let nextButton = ''
     let time
-    let undefinedArr =[6, 82, 163, 231]
+    let undefinedArr = [6, 82, 163, 231]
 
 
-
+    
+    
     function randomCountry() {
 
         if (countriesDetails) {
             a = Number(Math.round(Math.random() * countriesDetails.length))
+
             if (countriesDetails[a] !== undefined && !undefinedArr.includes(a)) {
                 result = countriesDetails[a]
                 rightAnswer = result.name
                 console.log(rightAnswer)
-
             } else {
                 result = countriesDetails[a + 1]
                 rightAnswer = result.name
@@ -41,7 +42,11 @@ export default function Country({
             }
         }
     }
+
     randomCountry()
+
+
+
 
     function randomAnswers() {
 
@@ -50,32 +55,30 @@ export default function Country({
                 let rundomIndex = Number(Math.round(Math.random() * countriesDetails.length))
 
                 if (rundomIndex !== a && !optionAnswersIndex.includes(rundomIndex) && !undefinedArr.includes(rundomIndex)) {
-
                     optionAnswersIndex.push(rundomIndex)
                 } else {
                     index -= 1
                 }
-
             }
+
             optionAnswersIndex.push(a)
 
 
             for (let index = 0; index < optionAnswersIndex.length; index++) {
+
                 if (countriesDetails[optionAnswersIndex[index]] !== undefined) {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index]])
                 } else {
                     optionAnswers.push(countriesDetails[optionAnswersIndex[index] + 1])
                 }
-
             }
 
-            console.log(optionAnswers)
             shuffle(optionAnswers)
+
             console.log(optionAnswers)
             optionAnswers.map((k, i) => {
                 console.log(k)
             })
-            // console.log(r)
         }
     }
 
@@ -83,36 +86,35 @@ export default function Country({
 
 
 
-
+    
     const [countCorrectAnswer, setCountCorrectAnswer] = useState(0);
 
     function handleInput(e) {
 
         if (e.target.value === rightAnswer) {
             e.currentTarget.classList.add("right")
-
-            
             listItems = e.target.parentElement.parentElement.children
-            // console.log(listItems)
             nextButton = e.target.parentElement.parentElement.children
             nextButton[5].classList.add("next2")
-            console.log(nextButton)
 
-            
-            for (let i = 0; i < listItems.length; i++) {
-                console.log(listItems[i])
-                
+            for (let i = 1; i <= 4; i++) {
+                listItems[i].children[0].disabled = true
+
                 if (listItems[i].innerText === rightAnswer) {
                     correctAnswer = listItems[i]
                     correctAnswer = correctAnswer.children[0]
-                    // console.log(correctAnswer)
                     correctAnswer.classList.add("right")
-                    
                 }
             }
-            
-            
+
+
             time = window.setTimeout(() => {
+
+                for (let i = 1; i <= 4; i++) {
+                    nextButton[i].children[0].disabled = false
+                    console.log(nextButton[i].children[0])
+                }
+                
                 e.target.classList.remove("right")
                 nextButton[5].classList.remove("next2")
                 setCountCorrectAnswer(countCorrectAnswer + 1)
@@ -126,22 +128,35 @@ export default function Country({
 
 
             listItems = e.target.parentElement.parentElement.children
-            // console.log(listItems)
+            nextButton = e.target.parentElement.parentElement.children
+
+            console.log(listItems)
             // console.log(listItems[2].innerText)
 
-            for (let i = 0; i < 4; i++) {
-              if (listItems[i].innerText === rightAnswer) {
-                correctAnswer = listItems[i]
-                correctAnswer = correctAnswer.children[0]
-                // let correctAns = correctAnswer
-                correctAnswer.classList.add("right")
-        console.log(correctAnswer)
-        // return correctAnswer
-              }
+            for (let i = 1; i <= 4; i++) {
+                nextButton[i].children[0].disabled = true
+
+                if (listItems[i].innerText === rightAnswer) {
+                    correctAnswer = listItems[i]
+                    correctAnswer = correctAnswer.children[0]
+                    // let correctAns = correctAnswer
+                    correctAnswer.classList.add("right")
+                    console.log(correctAnswer)
+                    // return correctAnswer
+                }else{
+                    console.log(listItems[i].children[0])
+                    // let aa= listItems[i].children[0]
+                    
+                    // aa.classList.add("wrong")
+                }
             }
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
-                // correctAnswer.classList.remove("right")
+                
+                for (let i = 1; i <= 4; i++) {
+                    // nextButton[i].children[0].disabled = false
+                    console.log(nextButton[i].children[0])
+                }
 
                 setCountCorrectAnswer(0)
 
@@ -160,7 +175,12 @@ export default function Country({
     function timoutFunc() {
         console.log('mdjdjdjd')
         console.log(time)
-        // window.setTimeout(0)
+
+        for (let i = 1; i <= 4; i++) {
+            nextButton[i].children[0].disabled = false
+            console.log(nextButton[i].children[0])
+        }
+
         nextButton[5].classList.remove("next2")
         correctAnswer.classList.remove("right")
 
@@ -171,7 +191,9 @@ export default function Country({
         return navigate('/capital-quiz')
 
     }
-
+    // if (countriesDetails.loading) {
+    //     return <Spinner />
+    //   }
     return (
 
         <div>
