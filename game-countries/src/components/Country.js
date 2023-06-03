@@ -21,7 +21,7 @@ export default function Country({
     let listItems = ''
     let nextButton = ''
     let time
-    let undefinedArr = [6, 82, 163, 231]
+    let undefinedArr = [6, 82, 163, 231, 35]
 
 
     

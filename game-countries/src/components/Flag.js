@@ -21,7 +21,7 @@ export default function Country({
     let listItems = ''
     let nextButton = ''
     let time
-    let undefinedArr =[6, 82, 163, 231]
+    let undefinedArr =[6, 82, 163, 231, 35]
 
 
 
@@ -64,7 +64,7 @@ export default function Country({
 
             }
             optionAnswersIndex.push(a)
-
+console.log(optionAnswersIndex)
 
             for (let index = 0; index < optionAnswersIndex.length; index++) {
                 if (countriesDetails[optionAnswersIndex[index]] !== undefined) {
@@ -125,6 +125,8 @@ export default function Country({
 
             time = window.setTimeout(() => {
                 e.target.classList.remove("right")
+                correctAnswer.classList.remove("right")
+
                 for (let i = 2; i <= 5; i++) {
                     nextButton[i].children[0].disabled = false
                     console.log(nextButton[i].children[0])
