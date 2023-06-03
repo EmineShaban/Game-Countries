@@ -109,9 +109,10 @@ export default function Country({
             listItems = e.target.parentElement.parentElement.children
             // console.log(listItems)
 
-            for (let i = 0; i < listItems.length; i++) {
-                // console.log(listItems[i])
+            for (let i = 2; i <= 5; i++) {
+                console.log(listItems[i].children[0].disabled)
                 listItems[i].children[0].disabled = true
+                console.log(listItems[i].children[0].disabled)
 
                 if (listItems[i].innerText === rightAnswer) {
                     correctAnswer = listItems[i]
@@ -124,6 +125,10 @@ export default function Country({
 
             time = window.setTimeout(() => {
                 e.target.classList.remove("right")
+                for (let i = 2; i <= 5; i++) {
+                    nextButton[i].children[0].disabled = false
+                    console.log(nextButton[i].children[0])
+                }
                 nextButton[6].classList.remove("next2")
 
                 setCountCorrectAnswer(countCorrectAnswer + 1)
@@ -140,26 +145,31 @@ export default function Country({
 
 
 
+            nextButton = e.target.parentElement.parentElement.children
 
             listItems = e.target.parentElement.parentElement.children
             // console.log(listItems)
 
-            for (let i = 0; i < listItems.length; i++) {
-                console.log(listItems[i])
+            for (let i = 2; i <=5; i++) {
+                nextButton[i].children[0].disabled = true
+
                 if (listItems[i].innerText === rightAnswer) {
                     correctAnswer = listItems[i]
                     correctAnswer = correctAnswer.children[0]
-                    // console.log(correctAnswer)
                     correctAnswer.classList.add("right")
-
                 }
             }
+
+
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
                 correctAnswer.classList.remove("right")
                 setCountCorrectAnswer(0)
 
-
+                for (let i = 2; i <= 5; i++) {
+                    nextButton[i].children[0].disabled = false
+                    console.log(nextButton[i].children[0])
+                }
 
                 return navigate('/wrong-flag', {
                     state: {
@@ -174,8 +184,10 @@ export default function Country({
     }
 
     function timoutFunc() {
-        console.log('mdjdjdjd')
-        console.log(time)
+        for (let i = 2; i <= 5; i++) {
+            nextButton[i].children[0].disabled = false
+            console.log(nextButton[i].children[0])
+        }
 
         nextButton[6].classList.remove("next2")
         correctAnswer.classList.remove("right")

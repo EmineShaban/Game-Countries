@@ -98,6 +98,7 @@ export default function Country({
             nextButton[5].classList.add("next2")
 
             for (let i = 1; i <= 4; i++) {
+                // console.log(listItems[i].children[0])
                 listItems[i].children[0].disabled = true
 
                 if (listItems[i].innerText === rightAnswer) {
@@ -120,18 +121,14 @@ export default function Country({
                 setCountCorrectAnswer(countCorrectAnswer + 1)
 
                 return <Navigate to={'/capital-quiz'} />
+
             }, 2000)
 
         } else {
             e.currentTarget.classList.add("wrong")
-            console.log(e)
-
 
             listItems = e.target.parentElement.parentElement.children
             nextButton = e.target.parentElement.parentElement.children
-
-            console.log(listItems)
-            // console.log(listItems[2].innerText)
 
             for (let i = 1; i <= 4; i++) {
                 nextButton[i].children[0].disabled = true
@@ -139,28 +136,20 @@ export default function Country({
                 if (listItems[i].innerText === rightAnswer) {
                     correctAnswer = listItems[i]
                     correctAnswer = correctAnswer.children[0]
-                    // let correctAns = correctAnswer
                     correctAnswer.classList.add("right")
-                    console.log(correctAnswer)
-                    // return correctAnswer
-                }else{
-                    console.log(listItems[i].children[0])
-                    // let aa= listItems[i].children[0]
-                    
-                    // aa.classList.add("wrong")
                 }
             }
+
+
             window.setTimeout(() => {
                 e.target.classList.remove("wrong")
                 
                 for (let i = 1; i <= 4; i++) {
-                    // nextButton[i].children[0].disabled = false
+                    nextButton[i].children[0].disabled = false
                     console.log(nextButton[i].children[0])
                 }
 
                 setCountCorrectAnswer(0)
-
-                console.log(correctAnswer)
 
                 return navigate('/wrong', {
                     state: {
@@ -173,9 +162,6 @@ export default function Country({
 
 
     function timoutFunc() {
-        console.log('mdjdjdjd')
-        console.log(time)
-
         for (let i = 1; i <= 4; i++) {
             nextButton[i].children[0].disabled = false
             console.log(nextButton[i].children[0])
@@ -187,13 +173,13 @@ export default function Country({
         window.clearTimeout(time)
         setCountCorrectAnswer(countCorrectAnswer + 1)
 
-        // return <Navigate to={'/flag-quiz'} />
         return navigate('/capital-quiz')
 
     }
-    // if (countriesDetails.loading) {
-    //     return <Spinner />
-    //   }
+
+    
+
+
     return (
 
         <div>
